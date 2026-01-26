@@ -7,4 +7,3 @@
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_xlujl")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
