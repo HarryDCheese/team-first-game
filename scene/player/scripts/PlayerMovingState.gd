@@ -12,8 +12,8 @@ func Enter():
 	
 func Update(_delta):
 	get_input()
+	handle_animation()
 	handle_movement()
-	handle_animation(player.last_dir)
 	
 func handle_movement():
 	player.velocity = input_dir * move_speed
@@ -22,17 +22,17 @@ func handle_movement():
 	if input_dir == Vector2.ZERO:
 		handle_transition("Idle")
 	
-func handle_animation(last_dir):
+func handle_animation():
 	if abs(input_dir.x) > abs(input_dir.y):
-		last_dir = "side"
+		player.last_dir = "side"
 		animator.flip_h = input_dir.x < 0
 	else:
 		if input_dir.y > 0:
-			last_dir = "down"
+			player.last_dir = "down"
 		elif input_dir.y < 0:
-			last_dir = "up"
+			player.last_dir = "up"
 		
-	animator.play(last_dir)
+	animator.play(player.last_dir)
 		
 func get_input():
 	input_dir = Input.get_vector("left","right","up", "down")
