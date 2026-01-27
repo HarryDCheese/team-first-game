@@ -1,7 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://didi6gos24tun"]
+[gd_scene load_steps=17 format=3 uid="uid://didi6gos24tun"]
 
-[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/character_body_2d.gd" id="1_uvqrg"]
+[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_uvqrg"]
 [ext_resource type="Texture2D" uid="uid://bgixlqvi15ui8" path="res://scene/player/Player_SpriteSheet.png" id="2_dorux"]
+[ext_resource type="Script" uid="uid://b00qhtf7f5ddo" path="res://scripts/FSM/FiniteStateMachine.gd" id="3_vxvf7"]
+[ext_resource type="Script" uid="uid://2gr6ohx6jvpp" path="res://scene/player/scripts/PlayerIdleState.gd" id="4_j6a40"]
+[ext_resource type="Script" uid="uid://cu2g3425582a3" path="res://scene/player/scripts/PlayerMovingState.gd" id="5_ov1nj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxvf7"]
 
@@ -101,8 +104,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_uvqrg")
+last_dir = "down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vxvf7")
@@ -112,3 +116,15 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_32h0c")
 animation = &"idle_up"
 frame_progress = 0.6141316
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_vxvf7")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("4_j6a40")
+animator = NodePath("../../AnimatedSprite2D")
+
+[node name="Moving" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("5_ov1nj")
+animator = NodePath("../../AnimatedSprite2D")
