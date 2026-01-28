@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3mcwugy60sco"]
+
+[ext_resource type="PackedScene" uid="uid://n087seo3hxkk" path="res://scene/world/udlr.tscn" id="1_t1vgj"]
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/Room.png" id="2_oruui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifjq0"]
+atlas = ExtResource("2_oruui")
+region = Rect2(0, 32, 32, 32)
+
+[node name="DLR" instance=ExtResource("1_t1vgj")]
+texture = SubResource("AtlasTexture_ifjq0")
