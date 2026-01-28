@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://ojh5se5t1fpd"]
+
+[ext_resource type="PackedScene" uid="uid://n087seo3hxkk" path="res://scene/world/RoomGenerator/RoomScenes/udlr.tscn" id="1_yc0nn"]
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/RoomGenerator/Room.png" id="2_pi016"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc0nn"]
+atlas = ExtResource("2_pi016")
+region = Rect2(0, 32, 32, 32)
+
+[node name="DLR" instance=ExtResource("1_yc0nn")]
+texture = SubResource("AtlasTexture_yc0nn")
+doors = 14

@@ -1,0 +1,22 @@
+[gd_scene load_steps=17 format=3 uid="uid://cyc1i6bgrb1b1"]
+
+[ext_resource type="Script" uid="uid://cal6kcrvk55o3" path="res://scene/world/RoomGenerator/dungeon_generator.gd" id="1_dmsmm"]
+[ext_resource type="PackedScene" uid="uid://n087seo3hxkk" path="res://scene/world/RoomGenerator/RoomScenes/udlr.tscn" id="2_xk0ti"]
+[ext_resource type="PackedScene" uid="uid://ip4fdokeevlt" path="res://scene/world/RoomGenerator/RoomScenes/u.tscn" id="3_eqcto"]
+[ext_resource type="PackedScene" uid="uid://efy7ccqo6y77" path="res://scene/world/RoomGenerator/RoomScenes/ud.tscn" id="4_kk72b"]
+[ext_resource type="PackedScene" uid="uid://bipgliqxbs0rg" path="res://scene/world/RoomGenerator/RoomScenes/ul.tscn" id="5_17ggj"]
+[ext_resource type="PackedScene" uid="uid://p0gha4va310b" path="res://scene/world/RoomGenerator/RoomScenes/ur.tscn" id="6_4vxue"]
+[ext_resource type="PackedScene" uid="uid://dq3x0d0d4oo1l" path="res://scene/world/RoomGenerator/RoomScenes/udl.tscn" id="7_nqik2"]
+[ext_resource type="PackedScene" uid="uid://cdgmnn1mre5mn" path="res://scene/world/RoomGenerator/RoomScenes/ulr.tscn" id="8_hkkgj"]
+[ext_resource type="PackedScene" uid="uid://l341ocfj0fsm" path="res://scene/world/RoomGenerator/RoomScenes/udr.tscn" id="9_btev4"]
+[ext_resource type="PackedScene" uid="uid://ojh5se5t1fpd" path="res://scene/world/RoomGenerator/RoomScenes/dlr.tscn" id="10_jmnu6"]
+[ext_resource type="PackedScene" uid="uid://c2v13pbbdkbxl" path="res://scene/world/RoomGenerator/RoomScenes/dr.tscn" id="11_v7par"]
+[ext_resource type="PackedScene" uid="uid://ct3vufonfcboq" path="res://scene/world/RoomGenerator/RoomScenes/dl.tscn" id="12_tjevo"]
+[ext_resource type="PackedScene" uid="uid://bijq3dykhgbln" path="res://scene/world/RoomGenerator/RoomScenes/d.tscn" id="13_a02vg"]
+[ext_resource type="PackedScene" uid="uid://dy40u03o8hclv" path="res://scene/world/RoomGenerator/RoomScenes/lr.tscn" id="14_kgeom"]
+[ext_resource type="PackedScene" uid="uid://crxnkvt1bdhyk" path="res://scene/world/RoomGenerator/RoomScenes/l.tscn" id="15_dd0js"]
+[ext_resource type="PackedScene" uid="uid://bm7rnnj3kn6qh" path="res://scene/world/RoomGenerator/RoomScenes/r.tscn" id="16_jruwm"]
+
+[node name="DungeonGenerator" type="Node2D"]
+script = ExtResource("1_dmsmm")
+rooms = Array[PackedScene]([ExtResource("2_xk0ti"), ExtResource("8_hkkgj"), ExtResource("9_btev4"), ExtResource("7_nqik2"), ExtResource("4_kk72b"), ExtResource("5_17ggj"), ExtResource("12_tjevo"), ExtResource("6_4vxue"), ExtResource("11_v7par"), ExtResource("14_kgeom"), ExtResource("3_eqcto"), ExtResource("13_a02vg"), ExtResource("15_dd0js"), ExtResource("16_jruwm"), ExtResource("10_jmnu6")])

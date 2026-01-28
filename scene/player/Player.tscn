@@ -128,3 +128,5 @@ animator = NodePath("../../AnimatedSprite2D")
 [node name="Moving" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
 script = ExtResource("5_ov1nj")
 animator = NodePath("../../AnimatedSprite2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]

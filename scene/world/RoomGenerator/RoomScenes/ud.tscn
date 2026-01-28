@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://efy7ccqo6y77"]
+
+[ext_resource type="PackedScene" uid="uid://n087seo3hxkk" path="res://scene/world/RoomGenerator/RoomScenes/udlr.tscn" id="1_5lulc"]
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/RoomGenerator/Room.png" id="2_u8dnu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5mkm"]
+atlas = ExtResource("2_u8dnu")
+region = Rect2(64, 0, 32, 32)
+
+[node name="UD" instance=ExtResource("1_5lulc")]
+rotation = 1.5707964
+texture = SubResource("AtlasTexture_m5mkm")
+doors = 3

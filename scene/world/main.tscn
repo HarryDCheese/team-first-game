@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://j0dycrk4hcdb"]
+[gd_scene load_steps=3 format=3 uid="uid://j0dycrk4hcdb"]
 
 [ext_resource type="PackedScene" uid="uid://didi6gos24tun" path="res://scene/player/Player.tscn" id="1_xlujl"]
+[ext_resource type="PackedScene" uid="uid://cyc1i6bgrb1b1" path="res://scene/world/RoomGenerator/dungeon_generator.tscn" id="2_5dmkr"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_xlujl")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="DungeonGenerator" parent="." instance=ExtResource("2_5dmkr")]
