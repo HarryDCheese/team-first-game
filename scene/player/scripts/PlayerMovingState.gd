@@ -32,10 +32,10 @@ func handle_animation():
 		elif input_dir.y < 0:
 			player.last_dir = "up"
 		
-	animator.play(player.last_dir)
+	animator.play("move_" + player.last_dir)
 		
 func get_input():
-	input_dir = Input.get_vector("left","right","up", "down")
+	input_dir = Input.get_vector("move_left","move_right","move_up", "move_down")
 	
 func handle_transition(new_state: String):
 	state_transition.emit(self, new_state)
