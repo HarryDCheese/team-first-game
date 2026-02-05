@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://didi6gos24tun"]
+[gd_scene load_steps=20 format=3 uid="uid://didi6gos24tun"]
 
 [ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_uvqrg"]
 [ext_resource type="Texture2D" uid="uid://bgixlqvi15ui8" path="res://scene/player/Player_SpriteSheet.png" id="2_dorux"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cu2g3425582a3" path="res://scene/player/scripts/PlayerMovingState.gd" id="5_ov1nj"]
 [ext_resource type="Script" uid="uid://oel44u8mmbiu" path="res://scripts/projectile/Shooting.gd" id="6_xewb5"]
 [ext_resource type="PackedScene" uid="uid://43fu1msac8to" path="res://scripts/projectile/projectile.tscn" id="7_4kw3b"]
+[ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandleAnimation.gd" id="8_4kw3b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxvf7"]
 
@@ -108,7 +109,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator") groups=["Player"]]
 script = ExtResource("1_uvqrg")
-animator = NodePath("AnimatedSprite2D")
+animator = NodePath("FSM/HandleAnimation")
 last_dir = "down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -119,21 +120,33 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_32h0c")
 animation = &"idle_side"
 
-[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_vxvf7")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
-script = ExtResource("4_j6a40")
-animator = NodePath("../../AnimatedSprite2D")
-
-[node name="Moving" type="Node" parent="FSM" node_paths=PackedStringArray("animator")]
-script = ExtResource("5_ov1nj")
-animator = NodePath("../../AnimatedSprite2D")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Gunpoint" type="Marker2D" parent="."]
 position = Vector2(0, -7)
 script = ExtResource("6_xewb5")
 projectile_scene = ExtResource("7_4kw3b")
+
+[node name="FSM" type="Node" parent="."]
+
+[node name="MovementFSM" type="Node" parent="FSM" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_vxvf7")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FSM/MovementFSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("4_j6a40")
+animator = NodePath("../../HandleAnimation")
+
+[node name="Moving" type="Node" parent="FSM/MovementFSM" node_paths=PackedStringArray("animator")]
+script = ExtResource("5_ov1nj")
+animator = NodePath("../../HandleAnimation")
+
+[node name="CombatFSM" type="Node" parent="FSM"]
+
+[node name="Projectile" type="Node" parent="FSM/CombatFSM"]
+
+[node name="Melee" type="Node" parent="FSM/CombatFSM"]
+
+[node name="HandleAnimation" type="Node" parent="FSM" node_paths=PackedStringArray("animation")]
+script = ExtResource("8_4kw3b")
+animation = NodePath("../../AnimatedSprite2D")

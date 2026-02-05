@@ -1,7 +1,7 @@
 extends State
 class_name PlayerIdle
 
-@export var animator: AnimatedSprite2D
+@export var animator: HandleAnimation
 var player : CharacterBody2D
 
 func Enter():
@@ -9,9 +9,12 @@ func Enter():
 	
 func Update(_delta):
 	if (Input.get_vector("move_left","move_right","move_up", "move_down")):
-		state_transition.emit(self, "Moving")
-		
-	handle_animation(player.last_dir)
+		handle_transition("Moving")
+	
+	handle_animation()
 
-func handle_animation(last_dir):
-	animator.play("idle_" + last_dir)
+func handle_transition(new_state: String):
+	state_transition.emit(self, new_state)
+	
+func handle_animation():
+	animator.play_idle(player.last_dir)
