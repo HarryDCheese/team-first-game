@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://didi6gos24tun"]
+[gd_scene load_steps=23 format=3 uid="uid://didi6gos24tun"]
 
 [ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_uvqrg"]
 [ext_resource type="Texture2D" uid="uid://bgixlqvi15ui8" path="res://scene/player/Player_SpriteSheet.png" id="2_dorux"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://43fu1msac8to" path="res://scripts/projectile/projectile.tscn" id="7_4kw3b"]
 [ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandleAnimation.gd" id="8_4kw3b"]
 [ext_resource type="Script" uid="uid://5nwm0kgxg4y3" path="res://scene/player/scripts/PlayerShootingState.gd" id="8_a5dh7"]
+[ext_resource type="Script" uid="uid://cfcmy3xndjiy" path="res://scene/player/scripts/PlayerDashingState.gd" id="8_mc8hd"]
 [ext_resource type="Script" uid="uid://djldwr1ofer3f" path="res://scene/player/scripts/PlayerAttackingState.gd" id="9_c12fn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxvf7"]
@@ -140,6 +141,9 @@ script = ExtResource("4_j6a40")
 
 [node name="Moving" type="Node" parent="FSM/MovementFSM"]
 script = ExtResource("5_ov1nj")
+
+[node name="Dashing" type="Node" parent="FSM/MovementFSM"]
+script = ExtResource("8_mc8hd")
 
 [node name="CombatFSM" type="Node" parent="FSM" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_vxvf7")
