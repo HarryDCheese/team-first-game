@@ -1,28 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://bapukanrk4fwp"]
+[gd_scene load_steps=6 format=3 uid="uid://bapukanrk4fwp"]
+
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/RoomGenerator/RoomResources/Room.png" id="1_1hw2v"]
+[ext_resource type="Script" uid="uid://dooow46btrb47" path="res://scene/world/RoomGenerator/DoorScene/special_room_doors.gd" id="1_ogcy1"]
+[ext_resource type="PackedScene" uid="uid://dj1s410d5olxw" path="res://scene/world/RoomGenerator/DoorScene/door.tscn" id="1_qh568"]
 
 [sub_resource type="GDScript" id="GDScript_e7agj"]
 script/source = "extends Node2D
-
+@export var RoomLength = 32
 const DirectionVector ={
 	\"up\": Vector2(0,-1),
 	\"down\": Vector2(0,1),
 	\"left\": Vector2(-1,0),
 	\"right\": Vector2(1,0)
 }
-
-func setup_doors(dungeon, grid_pos: Vector2):
-	for door in $Doors.get_children():
-		var dir = door.name.to_lower()
-		var target_pos = grid_pos + DirectionVector[dir]
-		
-		door.visible = dungeon.has(target_pos)
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh568"]
+atlas = ExtResource("1_1hw2v")
+region = Rect2(64, 0, 32, 32)
 
 [node name="special room" type="Node2D"]
 script = SubResource("GDScript_e7agj")
 
 [node name="Doors" type="Node2D" parent="."]
+script = ExtResource("1_ogcy1")
 
-[node name="left" type="Node2D" parent="Doors"]
+[node name="left" parent="Doors" instance=ExtResource("1_qh568")]
 
-[node name="right" type="Node2D" parent="Doors"]
+[node name="right" parent="Doors" instance=ExtResource("1_qh568")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_qh568")

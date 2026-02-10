@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cyc1i6bgrb1b1"]
 
-[ext_resource type="Script" uid="uid://cal6kcrvk55o3" path="res://scene/world/RoomGenerator/dungeon_generator.gd" id="1_dmsmm"]
+[ext_resource type="Script" uid="uid://cal6kcrvk55o3" path="res://scene/world/RoomGenerator/Generatorscript/dungeon_generator.gd" id="1_dmsmm"]
 [ext_resource type="PackedScene" uid="uid://n087seo3hxkk" path="res://scene/world/RoomGenerator/RoomScenes/udlr.tscn" id="2_xk0ti"]
 [ext_resource type="PackedScene" uid="uid://ip4fdokeevlt" path="res://scene/world/RoomGenerator/RoomScenes/u.tscn" id="3_eqcto"]
 [ext_resource type="PackedScene" uid="uid://efy7ccqo6y77" path="res://scene/world/RoomGenerator/RoomScenes/ud.tscn" id="4_kk72b"]

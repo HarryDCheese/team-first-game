@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj1s410d5olxw"]
+
+[ext_resource type="Texture2D" uid="uid://c3pjd072hoi8o" path="res://icon.svg" id="2_dv3wo"]
+
+[sub_resource type="GDScript" id="GDScript_0tlkh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypqmy"]
+size = Vector2(1.25, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r4uk"]
+atlas = ExtResource("2_dv3wo")
+region = Rect2(0, 0, 128, 128)
+
+[node name="door" type="StaticBody2D"]
+script = SubResource("GDScript_0tlkh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ypqmy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.08203128, 0.14453131)
+texture = SubResource("AtlasTexture_7r4uk")
