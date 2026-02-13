@@ -1,24 +1,23 @@
 extends State
 class_name PlayerMoving
 
+@export var MOVE_SPEED:= 50
+
 var input_dir
 var player: CharacterBody2D
-
-@export var move_speed:= 50
-
 
 func Enter():
 	player = get_tree().get_first_node_in_group("Player")
 	
 func Update(_delta):
-	get_input()
+	handle_input()
 	handle_direction()
 	handle_animation()
 	handle_movement()
 	handle_transition("Idle")
 
 func handle_movement():
-	player.velocity = input_dir * move_speed
+	player.velocity = input_dir * MOVE_SPEED
 	player.move_and_slide()
 	
 func handle_direction():
@@ -31,7 +30,7 @@ func handle_direction():
 		elif input_dir.y < 0:
 			player.last_dir = "up"
 		
-func get_input():
+func handle_input():
 	input_dir = Input.get_vector("move_left","move_right","move_up", "move_down")
 	
 func handle_transition(new_state: String):
