@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=3 format=3 uid="uid://cj1b2crxyn28u"]
+
+[ext_resource type="PackedScene" uid="uid://bapukanrk4fwp" path="res://scene/world/RoomGenerator/RoomResources/RoomScenes/special_room.tscn" id="1_b10k8"]
+[ext_resource type="Script" uid="uid://dua655yrf56ru" path="res://scene/world/RoomGenerator/RoomResources/Resources/RoomData.gd" id="2_u5w5o"]
+
+[resource]
+script = ExtResource("2_u5w5o")
+type = "special"
+scene = ExtResource("1_b10k8")
+doors = Array[String](["left", "right"])
+weight = 1
+size = 64
+metadata/_custom_type_script = "uid://dua655yrf56ru"

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccsdlyp8qwjbx"]
 
 [ext_resource type="Script" uid="uid://copkswo67umw4" path="res://scene/world/RoomGenerator/Generatorscript/data_driven_dungeo_generator.gd" id="1_5u7pm"]
-[ext_resource type="Resource" uid="uid://cf6tb4oqcgiw0" path="res://scene/world/RoomGenerator/RoomResources/normal_room.tres" id="2_mnmb0"]
-[ext_resource type="Script" uid="uid://dua655yrf56ru" path="res://scene/world/RoomGenerator/RoomResources/RoomData.gd" id="2_wlftj"]
-[ext_resource type="Resource" uid="uid://cj1b2crxyn28u" path="res://scene/world/RoomGenerator/RoomResources/special_room.tres" id="3_wlftj"]
+[ext_resource type="Resource" uid="uid://cf6tb4oqcgiw0" path="res://scene/world/RoomGenerator/RoomResources/Resources/normal_room.tres" id="2_mnmb0"]
+[ext_resource type="Script" uid="uid://dua655yrf56ru" path="res://scene/world/RoomGenerator/RoomResources/Resources/RoomData.gd" id="2_wlftj"]
+[ext_resource type="Resource" uid="uid://cj1b2crxyn28u" path="res://scene/world/RoomGenerator/RoomResources/Resources/special_room.tres" id="3_wlftj"]
 
 [node name="Data-DrivenDungeonGenerator" type="Node2D"]
 script = ExtResource("1_5u7pm")

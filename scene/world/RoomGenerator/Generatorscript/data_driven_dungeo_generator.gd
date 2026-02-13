@@ -1,6 +1,5 @@
 extends Node2D
 
-const room_size = 40
 @export var RoomTemplate: Array[RoomData]
 
 const DirectionVector ={
@@ -21,12 +20,13 @@ func generate_dungeon():
 	dungeon.clear()
 	frontier.clear()
 	
-	var start_pos := Vector2.ZERO
+	var start_pos = Vector2.ZERO
 	dungeon[start_pos] = get_room_by_type("normal")
 	frontier.append(start_pos)
+	frontier.append(start_pos)
 	
-	while frontier.size() > 0 and dungeon.size() <= MaxRooms:
-		var current = frontier.pop_front()
+	while frontier.size() > 0 and dungeon.size() < MaxRooms:
+		var current= frontier[0]
 		expand_room(current)
 	
 	spawn_rooms()
@@ -34,8 +34,6 @@ func generate_dungeon():
 func expand_room(pos):
 	var room_data = dungeon[pos]
 	for dir in room_data.doors:
-		if randi()%2 <1:
-			continue
 		if dungeon.size()> MaxRooms:
 			return
 		
@@ -43,23 +41,31 @@ func expand_room(pos):
 		if dungeon.has(next_pos):
 			continue
 		
-		var neighbor_counter = 0
+		var next_pos_neighbor_counter = 0
 		for r in ["up","down","left","right"]:
 			var neighbor_pos = next_pos + DirectionVector[r]
 			if dungeon.has(neighbor_pos):
-				neighbor_counter +=1
-		
-		if neighbor_counter>= 2:
+				next_pos_neighbor_counter +=1
+		if next_pos_neighbor_counter>= 2:
 			continue
+		
+		var pos_neighbor_counter = 0
+		for r in ["up","down","left","right"]:
+			var neighbor_pos = pos + DirectionVector[r]
+			if dungeon.has(neighbor_pos):
+				pos_neighbor_counter +=1
+		if pos_neighbor_counter>= 3:
+			continue
+		
 		dungeon[next_pos] = PickRoom(dir)
-		frontier.append(next_pos)
+		frontier[0] = next_pos
 
 func spawn_rooms():
 	for pos in dungeon.keys():
 		var room_data = dungeon[pos]
 		var room = room_data.scene.instantiate()
 		
-		room.position = pos*room_size
+		room.position = pos*room.RoomLength
 		add_child(room)
 		dungeon[pos]={
 			"data": room_data,
@@ -83,6 +89,10 @@ func enable_doors():
 				door_node.visible = opposite(dir) in next_room_data.doors
 			else:
 				door_node.visible = false
+			door_node.get_node("DoorCollision").set_deferred("disabled", not door_node.visible)
+			
+			var wall_node = room_instance.get_node("Walls/" + dir)
+			wall_node.get_node("WallCollisionMiddle").set_deferred("disabled", door_node.visible)
 
 func opposite(dir):
 	return {

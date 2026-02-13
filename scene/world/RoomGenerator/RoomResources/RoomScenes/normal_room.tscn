@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpaytnh7d1jbf"]
+
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/RoomGenerator/RoomResources/RoomScenes/Room.png" id="1_tg1ym"]
+[ext_resource type="Script" uid="uid://dwdgdapxb7wtb" path="res://scene/world/RoomGenerator/WallScene/normal_room_walls.gd" id="2_cft0o"]
+[ext_resource type="PackedScene" uid="uid://ct6or220bbros" path="res://scene/world/RoomGenerator/WallScene/Wall.tscn" id="3_1adg0"]
+[ext_resource type="Script" uid="uid://c0d3auie7t0uo" path="res://scene/world/RoomGenerator/DoorScene/normal_room_doors.gd" id="4_6me1f"]
+[ext_resource type="PackedScene" uid="uid://dj1s410d5olxw" path="res://scene/world/RoomGenerator/DoorScene/door.tscn" id="5_e0vpg"]
+
+[sub_resource type="GDScript" id="GDScript_uqxh2"]
+script/source = "extends Node2D
+@export var RoomLength= 256
+@export var DoorLength= 48
+
+func _ready():
+	$Doors.position = Vector2.ZERO
+	$Walls.position = Vector2.ZERO
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iya0"]
+atlas = ExtResource("1_tg1ym")
+region = Rect2(32, 32, 32, 32)
+
+[node name="normal room" type="Node2D"]
+script = SubResource("GDScript_uqxh2")
+RoomLength = 80
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_5iya0")
+
+[node name="Walls" type="Node2D" parent="."]
+script = ExtResource("2_cft0o")
+
+[node name="up" parent="Walls" instance=ExtResource("3_1adg0")]
+
+[node name="down" parent="Walls" instance=ExtResource("3_1adg0")]
+
+[node name="left" parent="Walls" instance=ExtResource("3_1adg0")]
+
+[node name="right" parent="Walls" instance=ExtResource("3_1adg0")]
+
+[node name="Doors" type="Node2D" parent="."]
+position = Vector2(538, 267)
+script = ExtResource("4_6me1f")
+
+[node name="up" parent="Doors" instance=ExtResource("5_e0vpg")]
+position = Vector2(-538, -292)
+
+[node name="down" parent="Doors" instance=ExtResource("5_e0vpg")]
+
+[node name="left" parent="Doors" instance=ExtResource("5_e0vpg")]
+
+[node name="right" parent="Doors" instance=ExtResource("5_e0vpg")]

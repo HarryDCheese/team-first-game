@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bapukanrk4fwp"]
+
+[ext_resource type="Texture2D" uid="uid://coxoiul5wb3bn" path="res://scene/world/RoomGenerator/RoomResources/RoomScenes/Room.png" id="1_36ejn"]
+[ext_resource type="Script" uid="uid://dooow46btrb47" path="res://scene/world/RoomGenerator/DoorScene/special_room_doors.gd" id="2_5o426"]
+[ext_resource type="Script" uid="uid://dwdgdapxb7wtb" path="res://scene/world/RoomGenerator/WallScene/normal_room_walls.gd" id="2_o0n4a"]
+[ext_resource type="PackedScene" uid="uid://ct6or220bbros" path="res://scene/world/RoomGenerator/WallScene/Wall.tscn" id="3_8sbie"]
+[ext_resource type="PackedScene" uid="uid://dj1s410d5olxw" path="res://scene/world/RoomGenerator/DoorScene/door.tscn" id="3_o0n4a"]
+
+[sub_resource type="GDScript" id="GDScript_e7agj"]
+script/source = "extends Node2D
+@export var RoomLength = 256
+@export var DoorLength = 48
+
+func _ready():
+	$Doors.position = Vector2.ZERO
+	$Walls.position = Vector2.ZERO
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh568"]
+atlas = ExtResource("1_36ejn")
+region = Rect2(64, 0, 32, 32)
+
+[node name="special room" type="Node2D"]
+script = SubResource("GDScript_e7agj")
+RoomLength = 80
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_qh568")
+
+[node name="Walls" type="Node2D" parent="."]
+script = ExtResource("2_o0n4a")
+
+[node name="up" parent="Walls" instance=ExtResource("3_8sbie")]
+
+[node name="down" parent="Walls" instance=ExtResource("3_8sbie")]
+
+[node name="left" parent="Walls" instance=ExtResource("3_8sbie")]
+
+[node name="right" parent="Walls" instance=ExtResource("3_8sbie")]
+
+[node name="Doors" type="Node2D" parent="."]
+script = ExtResource("2_5o426")
+
+[node name="left" parent="Doors" instance=ExtResource("3_o0n4a")]
+
+[node name="right" parent="Doors" instance=ExtResource("3_o0n4a")]
