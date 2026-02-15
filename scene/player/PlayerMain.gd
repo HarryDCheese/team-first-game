@@ -1,18 +1,7 @@
-extends CharacterBody2D
+extends CharacterBase
 class_name PlayerMain
 
-@export var animator: HandleAnimation
-@export var last_dir : String
-var dir: Vector2
-
-func _process(_delta):
-	dir = handle_direction()
+var input_dir
 	
-func handle_direction():
-	match last_dir:
-		"up": return Vector2.UP
-		"down": return Vector2.DOWN
-		"side":
-			return Vector2.LEFT if animator.animation.flip_h else Vector2.RIGHT
-	return Vector2.UP
-	
+func handle_input():
+	input_dir = Input.get_vector("move_left","move_right","move_up", "move_down")

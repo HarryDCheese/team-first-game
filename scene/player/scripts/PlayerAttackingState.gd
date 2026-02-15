@@ -10,10 +10,7 @@ var hit_timer
 var countdown = false
 var can_attack = true
 
-var player: CharacterBody2D
-
 func Enter():
-	player = get_tree().get_first_node_in_group("Player")
 	reset_combo()
 	
 func Update(delta):

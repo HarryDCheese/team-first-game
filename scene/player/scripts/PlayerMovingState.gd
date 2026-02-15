@@ -3,39 +3,33 @@ class_name PlayerMoving
 
 @export var MOVE_SPEED:= 50
 
-var input_dir
-var player: CharacterBody2D
-
 func Enter():
-	player = get_tree().get_first_node_in_group("Player")
-	
+	return
+		
 func Update(_delta):
-	handle_input()
+	actor.handle_input()
 	handle_direction()
 	handle_animation()
 	handle_movement()
 	handle_transition("Idle")
 
 func handle_movement():
-	player.velocity = input_dir * MOVE_SPEED
-	player.move_and_slide()
+	actor.velocity = actor.input_dir * MOVE_SPEED
+	actor.move_and_slide()
 	
 func handle_direction():
-	if abs(input_dir.x) > abs(input_dir.y):
-		player.last_dir = "side"
-		player.animator.animation.flip_h = input_dir.x < 0
+	if abs(actor.input_dir.x) > abs(actor.input_dir.y):
+		actor.last_dir = "side"
+		actor.animator.animation.flip_h = actor.input_dir.x < 0
 	else:
-		if input_dir.y > 0:
-			player.last_dir = "down"
-		elif input_dir.y < 0:
-			player.last_dir = "up"
-		
-func handle_input():
-	input_dir = Input.get_vector("move_left","move_right","move_up", "move_down")
+		if actor.input_dir.y > 0:
+			actor.last_dir = "down"
+		elif actor.input_dir.y < 0:
+			actor.last_dir = "up"
 	
 func handle_transition(new_state: String):
-	if input_dir == Vector2.ZERO:
+	if actor.input_dir == Vector2.ZERO:
 		state_transition.emit(self, new_state)
 
 func handle_animation():
-	player.animator.play_moving(player.last_dir)
+	actor.animator.play_moving(actor.last_dir)

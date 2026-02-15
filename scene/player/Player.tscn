@@ -1,53 +1,53 @@
 [gd_scene load_steps=23 format=3 uid="uid://didi6gos24tun"]
 
-[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_uvqrg"]
-[ext_resource type="Texture2D" uid="uid://bgixlqvi15ui8" path="res://scene/player/Player_SpriteSheet.png" id="2_dorux"]
-[ext_resource type="Script" uid="uid://b00qhtf7f5ddo" path="res://scripts/FSM/FiniteStateMachine.gd" id="3_vxvf7"]
-[ext_resource type="Script" uid="uid://2gr6ohx6jvpp" path="res://scene/player/scripts/PlayerIdleState.gd" id="4_j6a40"]
-[ext_resource type="Script" uid="uid://cu2g3425582a3" path="res://scene/player/scripts/PlayerMovingState.gd" id="5_ov1nj"]
-[ext_resource type="Script" uid="uid://oel44u8mmbiu" path="res://scripts/projectile/Shooting.gd" id="6_xewb5"]
-[ext_resource type="PackedScene" uid="uid://43fu1msac8to" path="res://scripts/projectile/projectile.tscn" id="7_4kw3b"]
-[ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandleAnimation.gd" id="8_4kw3b"]
-[ext_resource type="Script" uid="uid://5nwm0kgxg4y3" path="res://scene/player/scripts/PlayerShootingState.gd" id="8_a5dh7"]
-[ext_resource type="Script" uid="uid://cfcmy3xndjiy" path="res://scene/player/scripts/PlayerDeathState.gd" id="8_mc8hd"]
-[ext_resource type="Script" uid="uid://djldwr1ofer3f" path="res://scene/player/scripts/PlayerAttackingState.gd" id="9_c12fn"]
+[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_qjg4s"]
+[ext_resource type="Texture2D" uid="uid://bgixlqvi15ui8" path="res://scene/player/Player_SpriteSheet.png" id="2_1wtbu"]
+[ext_resource type="Script" uid="uid://oel44u8mmbiu" path="res://scripts/projectile/Shooting.gd" id="3_p3aiu"]
+[ext_resource type="PackedScene" uid="uid://43fu1msac8to" path="res://scripts/projectile/projectile.tscn" id="4_f5r2w"]
+[ext_resource type="Script" uid="uid://b00qhtf7f5ddo" path="res://scripts/FSM/FiniteStateMachine.gd" id="5_oen5c"]
+[ext_resource type="Script" uid="uid://2gr6ohx6jvpp" path="res://scene/player/scripts/PlayerIdleState.gd" id="6_5g408"]
+[ext_resource type="Script" uid="uid://cu2g3425582a3" path="res://scene/player/scripts/PlayerMovingState.gd" id="7_sc4n2"]
+[ext_resource type="Script" uid="uid://cfcmy3xndjiy" path="res://scene/player/scripts/PlayerDashingState.gd" id="8_lrcci"]
+[ext_resource type="Script" uid="uid://5nwm0kgxg4y3" path="res://scene/player/scripts/PlayerShootingState.gd" id="9_fspl2"]
+[ext_resource type="Script" uid="uid://djldwr1ofer3f" path="res://scene/player/scripts/PlayerAttackingState.gd" id="10_eeiom"]
+[ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandleAnimation.gd" id="11_gt2ev"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxvf7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dorux"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxvf7"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrjex"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6a40"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov1nj"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30p5r"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhr4h"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e68h0"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rrmn"]
-atlas = ExtResource("2_dorux")
+atlas = ExtResource("2_1wtbu")
 region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_32h0c"]
@@ -111,7 +111,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator") groups=["Player"]]
-script = ExtResource("1_uvqrg")
+script = ExtResource("1_qjg4s")
 animator = NodePath("FSM/HandleAnimation")
 last_dir = "down"
 
@@ -127,35 +127,40 @@ animation = &"idle_side"
 
 [node name="Gunpoint" type="Marker2D" parent="."]
 position = Vector2(0, -7)
-script = ExtResource("6_xewb5")
-projectile_scene = ExtResource("7_4kw3b")
+script = ExtResource("3_p3aiu")
+projectile_scene = ExtResource("4_f5r2w")
 
 [node name="FSM" type="Node" parent="."]
 
 [node name="MovementFSM" type="Node" parent="FSM" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_vxvf7")
+script = ExtResource("5_oen5c")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="FSM/MovementFSM"]
-script = ExtResource("4_j6a40")
+[node name="Idle" type="Node" parent="FSM/MovementFSM" node_paths=PackedStringArray("actor")]
+script = ExtResource("6_5g408")
+actor = NodePath("../../..")
 
-[node name="Moving" type="Node" parent="FSM/MovementFSM"]
-script = ExtResource("5_ov1nj")
+[node name="Moving" type="Node" parent="FSM/MovementFSM" node_paths=PackedStringArray("actor")]
+script = ExtResource("7_sc4n2")
+actor = NodePath("../../..")
 
-[node name="Dashing" type="Node" parent="FSM/MovementFSM"]
-script = ExtResource("8_mc8hd")
+[node name="Dashing" type="Node" parent="FSM/MovementFSM" node_paths=PackedStringArray("actor")]
+script = ExtResource("8_lrcci")
+actor = NodePath("../../..")
 
 [node name="CombatFSM" type="Node" parent="FSM" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_vxvf7")
+script = ExtResource("5_oen5c")
 initial_state = NodePath("Shooting")
 
-[node name="Shooting" type="Node" parent="FSM/CombatFSM" node_paths=PackedStringArray("gun")]
-script = ExtResource("8_a5dh7")
+[node name="Shooting" type="Node" parent="FSM/CombatFSM" node_paths=PackedStringArray("gun", "actor")]
+script = ExtResource("9_fspl2")
 gun = NodePath("../../../Gunpoint")
+actor = NodePath("../../..")
 
-[node name="Attacking" type="Node" parent="FSM/CombatFSM"]
-script = ExtResource("9_c12fn")
+[node name="Attacking" type="Node" parent="FSM/CombatFSM" node_paths=PackedStringArray("actor")]
+script = ExtResource("10_eeiom")
+actor = NodePath("../../..")
 
 [node name="HandleAnimation" type="Node" parent="FSM" node_paths=PackedStringArray("animation")]
-script = ExtResource("8_4kw3b")
+script = ExtResource("11_gt2ev")
 animation = NodePath("../../AnimatedSprite2D")
