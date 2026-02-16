@@ -12,12 +12,16 @@ var can_attack = true
 
 func Enter():
 	reset_combo()
+	actor.hit_box.monitoring = true
 	
 func Update(delta):
 	handle_input()
 	handle_timer(delta)
 	handle_cooldown(delta)
 	handle_transition("Shooting")
+	
+func Exit():
+	actor.hit_box.monitoring = false
 	
 func handle_input():
 	if Input.is_action_just_pressed("primary_attack"):

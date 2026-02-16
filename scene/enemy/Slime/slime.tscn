@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bxklr4wykeq53"]
+[gd_scene load_steps=39 format=3 uid="uid://bxklr4wykeq53"]
 
 [ext_resource type="Script" uid="uid://bwpqucuh3fdu6" path="res://scene/enemy/Slime/scripts/SlimeMain.gd" id="1_up7sf"]
 [ext_resource type="Texture2D" uid="uid://c4yhmaylef3rs" path="res://scene/enemy/Slime/Slime.png" id="2_8tmjm"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://bfglb6h0f5y33" path="res://scene/enemy/Slime/scripts/SlimeMovingState.gd" id="4_8tmjm"]
 [ext_resource type="Script" uid="uid://ccnqphat1fogd" path="res://scene/enemy/Slime/scripts/SlimeIdleState.gd" id="5_hth2g"]
 [ext_resource type="Script" uid="uid://fjfn4du5ee23" path="res://scene/enemy/Slime/scripts/HandleSlimeAnimation.gd" id="6_i6a6p"]
+[ext_resource type="Script" uid="uid://xu3ijbdlrul2" path="res://scripts/components/health.gd" id="7_2yhpx"]
+[ext_resource type="Script" uid="uid://cu8ktw3kqfuyq" path="res://scripts/components/hurtbox.gd" id="8_lhcad"]
+[ext_resource type="Script" uid="uid://jd4w305kbakl" path="res://scripts/components/hitbox.gd" id="9_l4yaw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh0m2"]
 atlas = ExtResource("2_8tmjm")
@@ -430,6 +433,9 @@ _data = {
 radius = 5.0
 height = 22.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhcad"]
+radius = 12.0
+
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
 script = ExtResource("1_up7sf")
 animator = NodePath("HandleSlimeAnimation")
@@ -465,3 +471,19 @@ actor = NodePath("../..")
 [node name="HandleSlimeAnimation" type="Node" parent="." node_paths=PackedStringArray("animation")]
 script = ExtResource("6_i6a6p")
 animation = NodePath("../AnimatedSprite2D")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("7_2yhpx")
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("8_lhcad")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("9_l4yaw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_lhcad")
+debug_color = Color(0.9650709, 0.15663907, 0.2741524, 0.41960785)

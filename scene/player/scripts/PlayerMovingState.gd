@@ -20,7 +20,7 @@ func handle_movement():
 func handle_direction():
 	if abs(actor.input_dir.x) > abs(actor.input_dir.y):
 		actor.last_dir = "side"
-		actor.animator.animation.flip_h = actor.input_dir.x < 0
+		actor.animator.animation.flip_h = actor.input_dir.x > 0
 	else:
 		if actor.input_dir.y > 0:
 			actor.last_dir = "down"
