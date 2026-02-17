@@ -15,3 +15,8 @@ func play_idle(dir):
 	
 func play_attack(dir):
 	pass
+	
+func play_stun(dir):
+	name = "stun_" + dir
+	if real_animation.current_animation != name:
+		real_animation.play(name)

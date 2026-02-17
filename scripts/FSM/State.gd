@@ -5,6 +5,8 @@ class_name State
 
 signal state_transition
 @export var actor: CharacterBase
+@export var hurt_box: HurtBox
+@export var hit_box: HitBox
 
 func Enter():
 	pass
@@ -14,4 +16,3 @@ func Exit():
 
 func Update(_delta):
 	pass
-	

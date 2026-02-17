@@ -11,7 +11,7 @@ func Enter():
 func Update(delta):
 	handle_animation()
 	handle_timer(delta)
-	handle_transition("Moving")
+	handle_transition()
 	
 func Exit():
 	random_direction()
@@ -22,9 +22,11 @@ func handle_animation():
 func handle_timer(t):
 	timer -= t
 	
-func handle_transition(new_state: String):
+func handle_transition():
 	if timer <= 0:
-		state_transition.emit(self, new_state)
+		state_transition.emit(self, "Moving")
+	if hurt_box.is_stunned == true:
+		state_transition.emit(self, "Stunning")
 		
 func random_timer():
 	timer = randf_range(IDLE_MIN, IDLE_MAX)

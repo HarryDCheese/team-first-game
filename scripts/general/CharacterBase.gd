@@ -2,9 +2,7 @@ extends CharacterBody2D
 class_name CharacterBase
 
 @export var animator: HandleAnimation
-@export var last_dir : String
-@export var hurt_box: HurtBox
-@export var hit_box: HitBox
+@export var last_dir: String
 var dir: Vector2
 
 func _ready() -> void:
@@ -18,7 +16,7 @@ func handle_direction():
 		"up": return Vector2.UP
 		"down": return Vector2.DOWN
 		"side":
-			return Vector2.LEFT if animator.animation.flip_h else Vector2.RIGHT
+			return Vector2.RIGHT if animator.animation.flip_h else Vector2.LEFT
 	return Vector2.UP
 
 func die():

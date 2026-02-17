@@ -4,6 +4,8 @@ class_name PlayerAttacking
 @export var COMBO_MAX := 3
 @export var COOLDOWN := 0.2 #time between each hit
 @export var COMBO_TIMER := 50.0 #timer for reseting combo
+@export var ATTACKING_TIMER := 0.8 #for placeholder
+var attacking_timer #for placeholder
 var combo_timer
 var combo_index := 0
 var hit_timer
@@ -12,16 +14,19 @@ var can_attack = true
 
 func Enter():
 	reset_combo()
-	actor.hit_box.monitoring = true
+	hit_box.monitorable = true
+	attacking_timer = ATTACKING_TIMER
 	
 func Update(delta):
 	handle_input()
+	handle_animation()
 	handle_timer(delta)
 	handle_cooldown(delta)
-	handle_transition("Shooting")
+	handle_transition()
+	attacking_timer -= delta
 	
 func Exit():
-	actor.hit_box.monitoring = false
+	hit_box.monitorable = false
 	
 func handle_input():
 	if Input.is_action_just_pressed("primary_attack"):
@@ -58,11 +63,14 @@ func handle_cooldown(t):
 		if hit_timer <= 0:
 			can_attack = true
 		
-func handle_transition(new_state: String):
-	if Input.is_action_pressed("shoot"):
-		state_transition.emit(self, new_state)
+func handle_transition():
+	if Input.is_action_pressed("shoot") or attacking_timer <= 0:
+		state_transition.emit(self, "Shooting")
+
+func handle_animation():
+	actor.animator.play_attack(actor.last_dir)
 	
-		
+
 #For testing
 func do_attack(hit_index):
 	can_attack = false

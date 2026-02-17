@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://didi6gos24tun"]
+[gd_scene load_steps=33 format=3 uid="uid://didi6gos24tun"]
 
-[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/PlayerMain.gd" id="1_qjg4s"]
+[ext_resource type="Script" uid="uid://cacglcjkkiuv6" path="res://scene/player/scripts/PlayerMain.gd" id="1_qjg4s"]
 [ext_resource type="Texture2D" uid="uid://dgwqdrk66p1h5" path="res://scene/player/Player_Spritesheet_1.png" id="2_77j1f"]
 [ext_resource type="Script" uid="uid://oel44u8mmbiu" path="res://scripts/projectile/Shooting.gd" id="3_p3aiu"]
 [ext_resource type="PackedScene" uid="uid://43fu1msac8to" path="res://scripts/projectile/projectile.tscn" id="4_f5r2w"]
@@ -10,10 +10,10 @@
 [ext_resource type="Script" uid="uid://cfcmy3xndjiy" path="res://scene/player/scripts/PlayerDashingState.gd" id="8_lrcci"]
 [ext_resource type="Script" uid="uid://5nwm0kgxg4y3" path="res://scene/player/scripts/PlayerShootingState.gd" id="9_fspl2"]
 [ext_resource type="Script" uid="uid://djldwr1ofer3f" path="res://scene/player/scripts/PlayerAttackingState.gd" id="10_eeiom"]
-[ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandleAnimation.gd" id="11_gt2ev"]
-[ext_resource type="Script" uid="uid://xu3ijbdlrul2" path="res://scripts/components/health.gd" id="12_seimy"]
-[ext_resource type="Script" uid="uid://jd4w305kbakl" path="res://scripts/components/hitbox.gd" id="13_sgyit"]
-[ext_resource type="Script" uid="uid://cu8ktw3kqfuyq" path="res://scripts/components/hurtbox.gd" id="14_nqp3i"]
+[ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandlePlayerAnimation.gd" id="11_gt2ev"]
+[ext_resource type="Script" uid="uid://xu3ijbdlrul2" path="res://scripts/components/Health.gd" id="12_seimy"]
+[ext_resource type="Script" uid="uid://4opyt7dqej34" path="res://scene/player/scripts/PlayerHurtBox.gd" id="13_pnt7x"]
+[ext_resource type="Script" uid="uid://c8if2i4w4f8td" path="res://scripts/components/CombatPivot.gd" id="14_seimy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxvf7"]
 
@@ -143,28 +143,34 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2cm5v"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator", "hurt_box", "hit_box") groups=["Player"]]
+[sub_resource type="GDScript" id="GDScript_seimy"]
+script/source = "extends HitBox
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnt7x"]
+radius = 11.045361
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator") groups=["Player"]]
+collision_layer = 2
 script = ExtResource("1_qjg4s")
-animator = NodePath("FSM/HandleAnimation")
+animator = NodePath("FSM/HandlePlayerAnimation")
 last_dir = "down"
-hurt_box = NodePath("HurtBox")
-hit_box = NodePath("HitBox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
+position = Vector2(0, 7.0000005)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_vxvf7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_32h0c")
-animation = &"idle_down"
-frame_progress = 0.010743399
+animation = &"move_up"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -4)
 
 [node name="Gunpoint" type="Marker2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(0, -11)
 script = ExtResource("3_p3aiu")
 projectile_scene = ExtResource("4_f5r2w")
 
@@ -195,27 +201,44 @@ script = ExtResource("9_fspl2")
 gun = NodePath("../../../Gunpoint")
 actor = NodePath("../../..")
 
-[node name="Attacking" type="Node" parent="FSM/CombatFSM" node_paths=PackedStringArray("actor")]
+[node name="Attacking" type="Node" parent="FSM/CombatFSM" node_paths=PackedStringArray("actor", "hit_box")]
 script = ExtResource("10_eeiom")
 actor = NodePath("../../..")
+hit_box = NodePath("../../../CombatPivot/HitBox")
 
-[node name="HandleAnimation" type="Node" parent="FSM" node_paths=PackedStringArray("animation")]
+[node name="HandlePlayerAnimation" type="Node" parent="FSM" node_paths=PackedStringArray("animation")]
 script = ExtResource("11_gt2ev")
 animation = NodePath("../../AnimatedSprite2D")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("12_seimy")
 
-[node name="HitBox" type="Area2D" parent="."]
-script = ExtResource("13_sgyit")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -4)
+collision_layer = 2
+collision_mask = 16
 monitorable = false
-script = ExtResource("14_nqp3i")
+script = ExtResource("13_pnt7x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_2cm5v")
 debug_color = Color(0.99506634, 0, 0.21937358, 0.41960785)
+
+[node name="CombatPivot" type="Node2D" parent="."]
+position = Vector2(0, -11)
+script = ExtResource("14_seimy")
+
+[node name="HitBox" type="Area2D" parent="CombatPivot"]
+collision_layer = 8
+collision_mask = 4
+monitoring = false
+script = SubResource("GDScript_seimy")
+damage = 0.5
+stun_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CombatPivot/HitBox"]
+position = Vector2(-0.1635412, 16.999212)
+rotation = 0.00015112029
+shape = SubResource("CircleShape2D_pnt7x")
+debug_color = Color(0.65956384, 0.51531196, 0, 0.41960785)

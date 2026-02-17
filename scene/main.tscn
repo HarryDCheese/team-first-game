@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://8yjlr2m1m5b2"]
+[gd_scene load_steps=3 format=3 uid="uid://8yjlr2m1m5b2"]
 
 [ext_resource type="PackedScene" uid="uid://didi6gos24tun" path="res://scene/player/Player.tscn" id="1_xlujl"]
-[ext_resource type="PackedScene" uid="uid://ccsdlyp8qwjbx" path="res://scene/world/RoomGenerator/Generatorscript/data_driven_dungeon_generator.tscn" id="3_eispx"]
 [ext_resource type="PackedScene" uid="uid://bxklr4wykeq53" path="res://scene/enemy/Slime/slime.tscn" id="3_wp4xf"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_xlujl")]
-
-[node name="Data-DrivenDungeonGenerator" parent="." instance=ExtResource("3_eispx")]
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.01, 0.01)
 
 [node name="Slime" parent="." instance=ExtResource("3_wp4xf")]
-position = Vector2(-36, 0)
+y_sort_enabled = true
+position = Vector2(-35.999996, -2.9802326e-08)
+rotation = 0.01099795

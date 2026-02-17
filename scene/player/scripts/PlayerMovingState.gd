@@ -1,7 +1,7 @@
 extends State
 class_name PlayerMoving
 
-@export var MOVE_SPEED:= 50
+@export var MOVE_SPEED := 50
 
 func Enter():
 	return
