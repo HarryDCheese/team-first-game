@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://5nwm0kgxg4y3" path="res://scene/player/scripts/PlayerShootingState.gd" id="9_fspl2"]
 [ext_resource type="Script" uid="uid://djldwr1ofer3f" path="res://scene/player/scripts/PlayerAttackingState.gd" id="10_eeiom"]
 [ext_resource type="Script" uid="uid://cgoxuh2ulx5hy" path="res://scene/player/scripts/HandlePlayerAnimation.gd" id="11_gt2ev"]
-[ext_resource type="Script" uid="uid://xu3ijbdlrul2" path="res://scripts/components/Health.gd" id="12_seimy"]
+[ext_resource type="Script" uid="uid://r2st7w7840jf" path="res://scene/player/scripts/PlayerHealth.gd" id="12_seimy"]
 [ext_resource type="Script" uid="uid://4opyt7dqej34" path="res://scene/player/scripts/PlayerHurtBox.gd" id="13_pnt7x"]
 [ext_resource type="Script" uid="uid://c8if2i4w4f8td" path="res://scripts/components/CombatPivot.gd" id="14_seimy"]
 
@@ -212,6 +212,7 @@ animation = NodePath("../../AnimatedSprite2D")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("12_seimy")
+MAX_HP = 100.0
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -4)

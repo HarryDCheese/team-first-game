@@ -19,6 +19,8 @@ func take_damage(amount: float):
 		hp = 0
 		died.emit()
 	
+	print(hp)
+	
 
 func heal(amount: float):
 	hp = clamp(hp + amount, 0, MAX_HP)

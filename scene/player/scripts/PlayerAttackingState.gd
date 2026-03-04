@@ -27,6 +27,7 @@ func Update(delta):
 	
 func Exit():
 	hit_box.monitorable = false
+	actor.animator.is_attacking = false
 	
 func handle_input():
 	if Input.is_action_just_pressed("primary_attack"):
