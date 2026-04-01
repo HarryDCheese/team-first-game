@@ -32,8 +32,6 @@ func random_timer():
 	timer = randf_range(IDLE_MIN, IDLE_MAX)
 	
 func random_direction():
-	actor.last_dir = ["up", "down", "side"].pick_random()
-	if actor.last_dir == "side":
-		actor.animator.animation.flip_h = [true, false].pick_random()
+	actor.last_dir = ["up", "down", "right", "left"].pick_random()
 
 	

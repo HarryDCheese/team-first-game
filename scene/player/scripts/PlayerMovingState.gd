@@ -18,14 +18,21 @@ func handle_movement():
 	actor.move_and_slide()
 	
 func handle_direction():
-	if abs(actor.input_dir.x) > abs(actor.input_dir.y):
-		actor.last_dir = "side"
-		actor.animator.animation.flip_h = actor.input_dir.x > 0
-	else:
-		if actor.input_dir.y > 0:
-			actor.last_dir = "down"
-		elif actor.input_dir.y < 0:
-			actor.last_dir = "up"
+	var dir_key = Vector2(sign(actor.input_dir.x), sign(actor.input_dir.y))
+	
+	var directions = {
+		Vector2(1, 0): "right",
+		Vector2(-1, 0): "left",
+		Vector2(0, 1): "down",
+		Vector2(0, -1): "up",
+		Vector2(1, 1): "down_right",
+		Vector2(-1, 1): "down_left",
+		Vector2(1, -1): "up_right",
+		Vector2(-1, -1): "up_left"
+	}
+	
+	if directions.has(dir_key):
+		actor.last_dir = directions[dir_key]
 	
 func handle_transition(new_state: String):
 	if actor.input_dir == Vector2.ZERO:
